@@ -9,22 +9,30 @@ import (
 )
 
 var application *tview.Application
+var pages *tview.Pages
 var box *tview.Box
 var quitModal *tview.Modal
 
 func init(){
 	box = tview.NewBox().SetBorder(true).SetTitle("IP Calculator")
+
 	quitModal = tview.NewModal().SetText("Do you really want to quit?").
 		AddButtons([]string {"Yes","No"}).
-		SetDoneFunc(quitModalDoneFunction)	
-	application = tview.NewApplication().EnableMouse(true).SetRoot(box,true)
+		SetDoneFunc(quitModalDoneFunction)
+
+	pages = tview.NewPages()
+
+	pages.AddPage("root",box,true,true)
+	pages.AddPage("quit-modal",quitModal,true,false)
+
+	application = tview.NewApplication().EnableMouse(true).SetRoot(pages,true)
 	application.SetInputCapture(handleEvent)
 }
 
 func handleEvent(event *tcell.EventKey) *tcell.EventKey {
 	switch event.Key(){
 		case tcell.KeyCtrlC:
-			application.SetRoot(quitModal,false)
+			pages.ShowPage("quit-modal")
 		default:
 			return event
 	}
@@ -35,7 +43,7 @@ func quitModalDoneFunction(buttonindex int, buttonlabel string){
 	if buttonindex == 0{
 		application.Stop()
 	}else{
-		application.SetRoot(box,true)
+		pages.SwitchToPage("root")
 	}
 }
 
