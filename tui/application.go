@@ -20,11 +20,8 @@ var usableRange *tview.TextView
 var totalIPAddresses *tview.TextView
 var usableIPAddresses *tview.TextView
 var ipType *tview.TextView
-var clearResultsButton *tview.Form
 
 func init(){
-
-
 	networkAddress = tview.NewTextView()
 	broadcastAddress = tview.NewTextView()
 	usableRange = tview.NewTextView()
@@ -32,12 +29,6 @@ func init(){
 	usableIPAddresses = tview.NewTextView()
 	ipType = tview.NewTextView()
 
-	clearResultsButton = tview.NewForm().
-		AddButton("Clear Results",nil).
-		SetButtonsAlign(tview.AlignRight)
-	
-	clearResultsButton.SetBorderPadding(0,0,0,0)
-	clearResultsButton.SetItemPadding(0)
 
 	resultsGrid = tview.NewGrid().
 		SetColumns(0,0).
@@ -56,7 +47,7 @@ func init(){
 		AddItem(totalIPAddresses,3,1,1,1,1,0,false).
 		AddItem(usableIPAddresses,4,1,1,1,1,0,false).
 		AddItem(ipType,5,1,1,1,1,0,false).
-		AddItem(clearResultsButton,6,1,1,1,1,0,false)
+		AddItem(widgets.ClearResultsButton,6,1,1,1,1,0,false)
 
 
 
