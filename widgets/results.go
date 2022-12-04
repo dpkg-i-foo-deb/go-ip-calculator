@@ -20,7 +20,7 @@ func initResults() {
 	IPType = tview.NewTextView()
 
 	ClearResultsButton = tview.NewForm().
-		AddButton("Clear Results", nil).
+		AddButton("Clear Results", clearResults).
 		SetButtonsAlign(tview.AlignRight)
 
 	ClearResultsButton.SetBorderPadding(0, 0, 0, 0)
@@ -50,4 +50,13 @@ func initResults() {
 	ResultsGrid.SetBorder(true)
 	ResultsGrid.SetBorderPadding(1, 1, 2, 2)
 	ResultsGrid.SetTitleAlign(tview.AlignCenter)
+}
+
+func clearResults(){
+	NetworkAddress.SetText("")
+	BroadcastAddress.SetText("")
+	UsableRange.SetText("")
+	TotalIPAddresses.SetText("")
+	UsableIPAddresses.SetText("")
+	IPType.SetText("")
 }
