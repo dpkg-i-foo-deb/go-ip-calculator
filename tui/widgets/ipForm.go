@@ -4,7 +4,7 @@ import "github.com/rivo/tview"
 
 var IPForm *tview.Form
 
-func init(){
+func initIPForm(){
 	IPForm = tview.NewForm()
 	IPForm.SetBorder(true)
 	IPForm.SetTitle("Enter the required data").SetTitleAlign(tview.AlignLeft)

@@ -11,7 +11,7 @@ var UsableIPAddresses *tview.TextView
 var IPType *tview.TextView
 
 
-func init(){
+func initResults(){
 	NetworkAddress = tview.NewTextView()
 	BroadcastAddress = tview.NewTextView()
 	UsableRange = tview.NewTextView()

@@ -12,52 +12,45 @@ var application *tview.Application
 
 var pages *tview.Pages
 var quitModal *tview.Modal
-var grid *tview.Grid
 
-func init(){
-	grid = tview.NewGrid().
-		SetColumns(0,0).
-		SetRows(2,0,1).
-		SetBorders(false).
-		AddItem(widgets.Title,0,0,1,2,0,0,true).		
-		AddItem(widgets.IPForm,1,0,1,1,0,0,false).
-		AddItem(widgets.ResultsGrid,1,1,1,1,0,0,false)
-
-	grid.SetBorderPadding(0,0,2,2)
+func init() {
 
 	quitModal = tview.NewModal().SetText("Do you really want to quit?").
-		AddButtons([]string {"Yes","No"}).
+		AddButtons([]string{"Yes", "No"}).
 		SetDoneFunc(quitModalDoneFunction)
 
 	pages = tview.NewPages()
 
-	pages.AddPage("root",grid,true,true)
-	pages.AddPage("quit-modal",quitModal,true,false)
+	pages.AddPage("root", widgets.MainGrid, true, false)
+	pages.AddPage("quit-modal", quitModal, true, false)
 
-	application = tview.NewApplication().EnableMouse(true).SetRoot(pages,true)
+	application = tview.NewApplication()
+	application.EnableMouse(true)
+	application.SetRoot(pages, true)
 	application.SetInputCapture(handleEvent)
-	application.SetFocus(widgets.IPForm)
+
+	pages.SwitchToPage("root")
 }
 
 func handleEvent(event *tcell.EventKey) *tcell.EventKey {
-	switch event.Key(){
-		case tcell.KeyCtrlC:
-			pages.ShowPage("quit-modal")
-		default:
-			return event
+	switch event.Key() {
+	case tcell.KeyCtrlC:
+		pages.ShowPage("quit-modal")
+	default:
+		return event
 	}
 	return nil
 }
 
-func quitModalDoneFunction(buttonindex int, buttonlabel string){
-	if buttonindex == 0{
+func quitModalDoneFunction(buttonindex int, buttonlabel string) {
+	if buttonindex == 0 {
 		application.Stop()
-	}else{
+	} else {
 		pages.SwitchToPage("root")
 	}
 }
 
-func StartApplication(){
+func StartApplication() {
 	err := application.Run()
 	util.HandleErrorStop(err)
 
