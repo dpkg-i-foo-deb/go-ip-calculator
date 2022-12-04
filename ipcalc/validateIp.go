@@ -14,6 +14,11 @@ const (
 )
 
 func ValidateIP(ip string) (int, error) {
+	
+	if len(ip) == 0{
+		return -1, errors.New("The IP address is empty")
+	}
+
 	//TODO check ipv6
 	if regex.CheckIpv4(ip) {
 		return IPv4, nil

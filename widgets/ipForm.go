@@ -1,6 +1,9 @@
 package widgets
 
-import "github.com/rivo/tview"
+import (
+	"ip-calculator/ipcalc"
+	"github.com/rivo/tview"
+)
 
 var IPForm *tview.Form
 
@@ -18,7 +21,19 @@ func initIPForm() {
 }
 
 func getValues(){
+	//Step 1, verify the IP address
+	addrField := IPForm.GetFormItem(0).(*tview.InputField)
 
+	_, err := ipcalc.ValidateIP(addrField.GetText())
+
+	if err != nil {
+		errorModal.SetText(err.Error())
+		Pages.ShowPage("error-modal")
+	}
+
+	//TODO wait for the user to press OK before clearing
+
+	//clearIPForm()
 }
 
 func clearIPForm(){

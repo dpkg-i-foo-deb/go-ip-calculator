@@ -7,6 +7,7 @@ func init() {
 	initResults()
 	initMainGrid()
 	initQuitModal()
+	initErrorModal()
 	initPages()
 	initApplication()
 }
