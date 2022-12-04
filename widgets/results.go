@@ -9,6 +9,7 @@ var UsableRange *tview.TextView
 var TotalIPAddresses *tview.TextView
 var UsableIPAddresses *tview.TextView
 var IPType *tview.TextView
+var ClearResultsButton *tview.Form
 
 func initResults() {
 	NetworkAddress = tview.NewTextView()
@@ -17,6 +18,14 @@ func initResults() {
 	TotalIPAddresses = tview.NewTextView()
 	UsableIPAddresses = tview.NewTextView()
 	IPType = tview.NewTextView()
+
+	ClearResultsButton = tview.NewForm().
+		AddButton("Clear Results", nil).
+		SetButtonsAlign(tview.AlignRight)
+
+	ClearResultsButton.SetBorderPadding(0, 0, 0, 0)
+	ClearResultsButton.SetItemPadding(0)
+
 
 	ResultsGrid = tview.NewGrid().
 		SetColumns(0, 0).
