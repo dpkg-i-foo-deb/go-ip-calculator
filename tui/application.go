@@ -13,57 +13,15 @@ var application *tview.Application
 var pages *tview.Pages
 var quitModal *tview.Modal
 var grid *tview.Grid
-var resultsGrid *tview.Grid
-var networkAddress *tview.TextView
-var broadcastAddress *tview.TextView
-var usableRange *tview.TextView
-var totalIPAddresses *tview.TextView
-var usableIPAddresses *tview.TextView
-var ipType *tview.TextView
 
 func init(){
-	networkAddress = tview.NewTextView()
-	broadcastAddress = tview.NewTextView()
-	usableRange = tview.NewTextView()
-	totalIPAddresses = tview.NewTextView()
-	usableIPAddresses = tview.NewTextView()
-	ipType = tview.NewTextView()
-
-
-	resultsGrid = tview.NewGrid().
-		SetColumns(0,0).
-		SetRows(0,0,0,0,0,0,0).
-		SetBorders(false).
-		SetMinSize(2,2).
-		AddItem(tview.NewTextView().SetText("Network Address"),0,0,1,1,1,0,false).
-		AddItem(tview.NewTextView().SetText("Broadcast Address"),1,0,1,1,1,0,false).
-		AddItem(tview.NewTextView().SetText("Usable Rage"),2,0,1,1,1,0,false).
-		AddItem(tview.NewTextView().SetText("Total IP addresses"),3,0,1,1,1,0,false).
-		AddItem(tview.NewTextView().SetText("Usable IP addresses"),4,0,1,1,1,0,false).
-		AddItem(tview.NewTextView().SetText("IP type"),5,0,1,1,1,0,false).
-		AddItem(networkAddress,0,1,1,1,1,0,false).
-		AddItem(broadcastAddress,1,1,1,1,1,0,false).
-		AddItem(usableRange,2,1,1,1,1,0,false).
-		AddItem(totalIPAddresses,3,1,1,1,1,0,false).
-		AddItem(usableIPAddresses,4,1,1,1,1,0,false).
-		AddItem(ipType,5,1,1,1,1,0,false).
-		AddItem(widgets.ClearResultsButton,6,1,1,1,1,0,false)
-
-
-
-		resultsGrid.SetTitle("Results")
-		resultsGrid.SetBorder(true)
-		resultsGrid.SetBorderPadding(1,1,2,2)
-		resultsGrid.SetTitleAlign(tview.AlignCenter)
-	
-
 	grid = tview.NewGrid().
 		SetColumns(0,0).
 		SetRows(2,0,1).
 		SetBorders(false).
 		AddItem(widgets.Title,0,0,1,2,0,0,true).		
 		AddItem(widgets.IPForm,1,0,1,1,0,0,false).
-		AddItem(resultsGrid,1,1,1,1,0,0,false)
+		AddItem(widgets.ResultsGrid,1,1,1,1,0,0,false)
 
 	grid.SetBorderPadding(0,0,2,2)
 
