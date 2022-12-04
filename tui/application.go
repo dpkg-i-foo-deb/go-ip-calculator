@@ -9,7 +9,7 @@ import (
 )
 
 var application *tview.Application
-var title *tview.TextView
+
 var pages *tview.Pages
 var quitModal *tview.Modal
 var grid *tview.Grid
@@ -24,9 +24,6 @@ var clearResultsButton *tview.Form
 
 func init(){
 
-	title = tview.NewTextView()	
-	title.SetText("IP Calculator")
-	title.SetTextAlign(tview.AlignCenter)
 
 	networkAddress = tview.NewTextView()
 	broadcastAddress = tview.NewTextView()
@@ -73,7 +70,7 @@ func init(){
 		SetColumns(0,0).
 		SetRows(2,0,1).
 		SetBorders(false).
-		AddItem(title,0,0,1,2,0,0,true).		
+		AddItem(widgets.Title,0,0,1,2,0,0,true).		
 		AddItem(widgets.IPForm,1,0,1,1,0,0,false).
 		AddItem(resultsGrid,1,1,1,1,0,0,false)
 
