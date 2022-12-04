@@ -1,11 +1,11 @@
 package main
 
 import (
-	"ip-calculator/tui"
+	"ip-calculator/widgets"
 	"os"
 )
 
 func main() {
-	tui.StartApplication()
+	widgets.StartApplication()
 	os.Exit(0)
 }

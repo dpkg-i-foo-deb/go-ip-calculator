@@ -1,9 +1,12 @@
 package widgets
 
-func init(){
+func init() {
 	initTitle()
 	initIPForm()
 	initResultsButton()
 	initResults()
 	initMainGrid()
+	initQuitModal()
+	initPages()
+	initApplication()
 }
