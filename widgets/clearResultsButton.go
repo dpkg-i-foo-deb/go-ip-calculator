@@ -4,12 +4,12 @@ import "github.com/rivo/tview"
 
 var ClearResultsButton *tview.Form
 
-func initResultsButton(){
+func initResultsButton() {
 	ClearResultsButton = tview.NewForm().
-		AddButton("Clear Results",nil).
+		AddButton("Clear Results", nil).
 		SetButtonsAlign(tview.AlignRight)
-	
-	ClearResultsButton.SetBorderPadding(0,0,0,0)
+
+	ClearResultsButton.SetBorderPadding(0, 0, 0, 0)
 	ClearResultsButton.SetItemPadding(0)
 
 }
