@@ -21,15 +21,13 @@ func init() {
 
 	pages = tview.NewPages()
 
-	pages.AddPage("root", widgets.MainGrid, true, false)
+	pages.AddPage("root", widgets.MainGrid, true, true)
 	pages.AddPage("quit-modal", quitModal, true, false)
 
 	application = tview.NewApplication()
 	application.EnableMouse(true)
 	application.SetRoot(pages, true)
 	application.SetInputCapture(handleEvent)
-
-	pages.SwitchToPage("root")
 }
 
 func handleEvent(event *tcell.EventKey) *tcell.EventKey {
