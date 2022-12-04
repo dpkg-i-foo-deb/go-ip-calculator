@@ -3,6 +3,7 @@ package main
 import (
 	"ip-calculator/widgets"
 	"os"
+	_"ip-calculator/regex"
 )
 
 func main() {
