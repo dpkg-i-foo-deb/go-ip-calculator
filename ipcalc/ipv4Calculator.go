@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"ip-calculator/structs"
+	"math"
 	"net"
 	"strconv"
 	"strings"
@@ -14,7 +15,10 @@ func FindIpv4Results(addr string, netmask string) (structs.Ipv4Result,error) {
 
 	//Create an actual ip to work with
 
-	ip := net.ParseIP(addr)
+	var ip net.IP
+	var ipParts[] string 
+	var decIp [4]int
+	var ipBytes [4]byte
 	var mask net.IPMask
 	broadcast := net.IP(make([]byte, 4))
 	netAddr := net.IP(make([]byte, 4))
@@ -25,12 +29,28 @@ func FindIpv4Results(addr string, netmask string) (structs.Ipv4Result,error) {
 	var maskOnes int 
 	var err error
 
-	if ip == nil {
-		return result, errors.New("Failed to get results")
+	//Split the IP address 
+	ipParts = strings.Split(addr,".")
+
+	//Convert string to integer
+	for i :=range ipParts {
+		decIp[i], err = strconv.Atoi(ipParts[i])
+
+		if err != nil {
+			return result, errors.New("Couldn't convert the IP address")
+		}
 	}
-	
+
+	//Make the IP
+	for i := range decIp {
+		ipBytes[i] = byte(decIp[i])	
+	}
+
+	ip = net.IP(ipBytes[:])
+
 	//Build the netmask
 	mask, err = ipv4MaskFromNonCIDR(netmask)
+
 
 	if err != nil {
 		return result, err
@@ -48,7 +68,7 @@ func FindIpv4Results(addr string, netmask string) (structs.Ipv4Result,error) {
 
 	//Find the total and usable ip addresses
 	maskOnes, _ = mask.Size()
-	totalAddresses = 2^(32-maskOnes)
+	totalAddresses = int(math.Pow(2,float64(32-maskOnes)))
 	usableAdresses = totalAddresses-2
 
 	//TODO get IP type

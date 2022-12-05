@@ -21,7 +21,7 @@ func initIPForm() {
 }
 
 func getValues(){
-	//Step 1, verify the IP address
+	//Verify the IP address
 	addrField := IPForm.GetFormItem(0).(*tview.InputField)
 
 	_, err := ipcalc.ValidateIP(addrField.GetText())
@@ -29,11 +29,27 @@ func getValues(){
 	if err != nil {
 		errorModal.SetText(err.Error())
 		Pages.ShowPage("error-modal")
+		return
 	}
 
-	//TODO wait for the user to press OK before clearing
+	//Verify the net mask
 
-	//clearIPForm()
+	maskField := IPForm.GetFormItem(1).(*tview.InputField)
+
+	_, err = ipcalc.ValidateNetMask(maskField.GetText())
+
+	if err != nil {
+		errorModal.SetText(err.Error())
+		Pages.ShowPage("error-modal")
+		return
+	}
+
+	//Get the results
+	//TODO include IPv6 stuff
+	results, err := ipcalc.FindIpv4Results(addrField.GetText(), maskField.GetText())
+
+	//Populate the GUI elements using the results 
+	setResults(results)
 }
 
 func clearIPForm(){

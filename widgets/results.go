@@ -1,6 +1,11 @@
 package widgets
 
-import "github.com/rivo/tview"
+import (
+	"ip-calculator/structs"
+	"strconv"
+
+	"github.com/rivo/tview"
+)
 
 var ResultsGrid *tview.Grid
 var NetworkAddress *tview.TextView
@@ -59,4 +64,14 @@ func clearResults(){
 	TotalIPAddresses.SetText("")
 	UsableIPAddresses.SetText("")
 	IPType.SetText("")
+}
+
+//TODO implement IPv6 stuff
+func setResults(results structs.Ipv4Result){
+	NetworkAddress.SetText(results.NetworkAddress)
+	BroadcastAddress.SetText(results.BroadcastAddress)
+	UsableRange.SetText(results.UsableRange)
+	TotalIPAddresses.SetText(strconv.Itoa(results.TotalIPAddresses))
+	UsableIPAddresses.SetText(strconv.Itoa(results.UsableIPAddresses))
+	IPType.SetText(results.IPType)
 }
